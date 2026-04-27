@@ -1,5 +1,7 @@
 # tap-web
 
+> **⚠️ SCAFFOLD STATE**: This repo currently contains only Sentry configuration and documentation. Application code, dependencies, and build tooling are not yet implemented.
+
 Single-page promotional website for a shirt product.
 
 ## Stack
@@ -10,6 +12,8 @@ Single-page promotional website for a shirt product.
 - Sentry (error monitoring)
 
 ## Getting started
+
+> **Note**: Installation and build commands below require `package.json` and Next.js dependencies, which are not yet configured.
 
 ### Prerequisites
 - Node.js 20+
@@ -55,6 +59,8 @@ npm run format       # Prettier (if configured)
 
 ## Testing
 
+> **Note**: Test infrastructure not yet implemented. Below describes the planned testing setup.
+
 ### Run all tests
 ```bash
 npm test
@@ -77,6 +83,16 @@ npm test -- --watch
 **Always run lint + type-check + test before pushing** — CI runs the same checks on every PR.
 
 ## Project structure
+
+**Currently implemented:**
+```
+instrumentation.ts   # ✅ Sentry init (loads first)
+sentry.client.config.ts  # ✅
+sentry.server.config.ts  # ✅
+.env.example        # ✅
+```
+
+**Planned structure:**
 ```
 src/
   app/
@@ -85,21 +101,20 @@ src/
   components/        # reusable React components
   lib/               # utilities
 public/              # static assets
-instrumentation.ts   # Sentry init (loads first)
-sentry.client.config.ts
-sentry.server.config.ts
 ```
 
 See [ARCHITECTURE.md](./ARCHITECTURE.md) for detailed structure.
 
 ## CI / CD
 
+> **Note**: CI workflow not yet configured. Below describes the planned setup.
+
 GitHub Actions runs on every PR and push to `main`:
 - Lint (ESLint)
 - Type-check (TypeScript)
 - Test (Jest/Vitest)
 
-Workflow: [`.github/workflows/ci.yml`](./.github/workflows/ci.yml)
+Workflow: [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) (to be created)
 
 DevOS **Watcher** monitors CI runs and alerts on failures.  
 DevOS **Medic** auto-investigates flaky tests and proposes fixes.

@@ -1,9 +1,25 @@
 # tap-web — Architecture
 
+> **⚠️ SCAFFOLD STATE**: This repo currently contains only Sentry configuration files (`instrumentation.ts`, `sentry.client.config.ts`, `sentry.server.config.ts`) and `.env.example`. The architecture described below is the target implementation blueprint.
+
 ## Overview
 Single-page promotional website built with Next.js 14 App Router. Optimized for fast load times, SEO, and mobile-first experience.
 
 ## Folder structure
+
+**Current state:**
+```
+tap-web/
+├── instrumentation.ts          # ✅ Sentry initialization hook
+├── sentry.client.config.ts     # ✅ Client-side Sentry config
+├── sentry.server.config.ts     # ✅ Server-side Sentry config
+├── .env.example                # ✅ Environment variable template
+├── CLAUDE.md                   # ✅ AI context documentation
+├── ARCHITECTURE.md             # ✅ This file
+└── README.md                   # ✅ User-facing documentation
+```
+
+**Target structure (to be implemented):**
 ```
 tap-web/
 ├── .github/
@@ -25,16 +41,16 @@ tap-web/
 │   │   └── ui/                 # shared UI primitives (Button, etc.)
 │   └── lib/
 │       └── utils.ts            # helper functions (cn for classnames, etc.)
-├── instrumentation.ts          # Next.js instrumentation hook → Sentry init
-├── sentry.client.config.ts     # Sentry client-side config
-├── sentry.server.config.ts     # Sentry server-side config
+├── instrumentation.ts          # ✅ Next.js instrumentation hook → Sentry init
+├── sentry.client.config.ts     # ✅ Sentry client-side config
+├── sentry.server.config.ts     # ✅ Sentry server-side config
 ├── tailwind.config.ts          # Tailwind theme, custom colors
 ├── tsconfig.json
 ├── next.config.js              # Next.js config (images, Sentry plugin)
-├── .env.example
+├── .env.example                # ✅
 ├── .env.local                  # git-ignored, local secrets
 ├── package.json
-└── README.md
+└── README.md                   # ✅
 ```
 
 ## Request lifecycle
