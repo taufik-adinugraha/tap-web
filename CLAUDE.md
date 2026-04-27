@@ -1,5 +1,7 @@
 # tap-web — AI Context
 
+> **⚠️ SCAFFOLD STATE**: This repo currently contains only Sentry configuration and documentation. The application structure described below is a blueprint for implementation. Actual files that exist: `instrumentation.ts`, `sentry.client.config.ts`, `sentry.server.config.ts`, `.env.example`.
+
 ## Purpose
 Single-page promotional website for a shirt product. Lightweight marketing landing page with product showcase, hero imagery, and call-to-action.
 
@@ -11,13 +13,18 @@ Single-page promotional website for a shirt product. Lightweight marketing landi
 - **Error monitoring**: Sentry
 
 ## Key files
+**Currently implemented:**
+- `instrumentation.ts` — Sentry initialization (first thing loaded) ✅
+- `sentry.client.config.ts` — client-side Sentry setup ✅
+- `sentry.server.config.ts` — server-side Sentry setup ✅
+- `.env.example` — environment variable template ✅
+
+**Planned structure:**
 - `src/app/page.tsx` — main landing page component
 - `src/app/layout.tsx` — root layout with metadata and global styles
-- `instrumentation.ts` — Sentry initialization (first thing loaded)
-- `sentry.client.config.ts` — client-side Sentry setup
-- `sentry.server.config.ts` — server-side Sentry setup
 - `tailwind.config.ts` — Tailwind configuration
 - `public/` — static assets (images, fonts)
+- `package.json` — dependencies and scripts
 
 ## Request lifecycle
 1. Next.js loads instrumentation.ts → Sentry initialized
@@ -43,6 +50,8 @@ Sentry is initialized in `instrumentation.ts` (runs before anything else in Next
 **Never swallow errors silently.** If you log it, also send it to Sentry so the team sees production issues.
 
 ## Testing
+
+> **Note**: Test infrastructure not yet implemented. Below describes the planned testing setup.
 
 **Run the full test suite:**
 ```bash
@@ -82,6 +91,8 @@ Always run `npm run lint`, `npm run type-check`, and `npm test` before committin
 - `sentry.*.config.ts` — error reporting config, changes should be intentional
 
 ## Local development
+> **Note**: Build tooling and dependencies not yet configured. Commands below require `package.json` and Next.js setup.
+
 ```bash
 npm install
 npm run dev       # starts dev server on http://localhost:3000
