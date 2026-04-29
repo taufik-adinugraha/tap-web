@@ -3,30 +3,33 @@
 ## Purpose
 Single-page promotional website for a shirt product. Lightweight marketing landing page with product showcase, hero imagery, and call-to-action.
 
-## Stack
-- **Framework**: Next.js 14 (App Router)
+## Current state
+⚠️ **Initial scaffold only** — Next.js app not yet created. Repository contains Sentry configuration files and documentation templates. The Next.js application, components, and tests need to be implemented.
+
+## Planned stack
+- **Framework**: Next.js 14 (App Router) — *not yet installed*
 - **Runtime**: Node 20
-- **Styling**: Tailwind CSS
+- **Styling**: Tailwind CSS — *not yet configured*
 - **Deployment**: Vercel
-- **Error monitoring**: Sentry
+- **Error monitoring**: Sentry — *config files present*
 
-## Key files
-- `src/app/page.tsx` — main landing page component
-- `src/app/layout.tsx` — root layout with metadata and global styles
-- `instrumentation.ts` — Sentry initialization (first thing loaded)
-- `sentry.client.config.ts` — client-side Sentry setup
-- `sentry.server.config.ts` — server-side Sentry setup
-- `tailwind.config.ts` — Tailwind configuration
-- `public/` — static assets (images, fonts)
+## Files currently in repo
+- `instrumentation.ts` — Sentry initialization hook (ready for Next.js integration)
+- `sentry.client.config.ts` — client-side Sentry setup (ready)
+- `sentry.server.config.ts` — server-side Sentry setup (ready)
+- `.env.example` — environment variables template
 
-## Request lifecycle
-1. Next.js loads instrumentation.ts → Sentry initialized
-2. App Router serves `/` from `src/app/page.tsx`
-3. Client-side hydration with React 18
-4. Static assets served from `/public`
+## Next steps to implement
+1. Initialize Next.js 14 project (`npx create-next-app@latest`)
+2. Move Sentry config files into new project structure
+3. Create `src/app/page.tsx` — landing page
+4. Create `src/app/layout.tsx` — root layout with metadata
+5. Set up Tailwind CSS
+6. Create components in `src/components/`
+7. Add product images to `public/`
 
-## Development patterns
-- **Components**: Colocate in `src/components/` as needed, prefer Server Components by default
+## Development patterns (when implemented)
+- **Components**: Colocate in `src/components/`, prefer Server Components by default
 - **Metadata**: Define in layout.tsx for SEO (title, description, og:image)
 - **Images**: Use `next/image` for automatic optimization
 - **Styling**: Tailwind utility classes, custom theme in tailwind.config.ts
@@ -44,52 +47,43 @@ Sentry is initialized in `instrumentation.ts` (runs before anything else in Next
 
 ## Testing
 
-**Run the full test suite:**
+⚠️ **Not yet implemented** — no test suite or package.json exists yet.
+
+**Planned test setup:**
+- Test framework: Jest or Vitest
+- Testing library: React Testing Library
+- Test files: `src/app/page.test.tsx`, component tests
+
+**When implemented, run tests:**
 ```bash
-npm test
+npm test                  # full suite
+npm test -- --watch       # watch mode
 ```
 
-**Required environment variables for tests:**
-- `NODE_ENV=test` (usually auto-set by Jest/Vitest)
-- No external services needed for unit tests
-
-**Setup steps:**
-1. Install dependencies: `npm install`
-2. Run tests: `npm test`
-3. For watch mode during development: `npm test -- --watch`
-
-**Expected output:**
-Tests will pass with output like:
-```
-✓ src/app/page.test.tsx (2)
-  ✓ renders hero section
-  ✓ displays product image
-
-Tests: 2 passed (2 total)
-```
-
-**What we test:**
+**What to test:**
 - Component rendering (smoke tests for main page sections)
-- Responsive behavior (if using testing-library)
+- Responsive behavior
 - Accessibility basics (heading hierarchy, alt text)
 
-**Running locally before push:**
-Always run `npm run lint`, `npm run type-check`, and `npm test` before committing. CI will run the same checks.
+**Pre-push checklist (once set up):**
+- `npm run lint`
+- `npm run type-check`
+- `npm test`
 
 ## Do not touch
 - `instrumentation.ts` — Sentry must initialize first, don't move or delay imports
-- `.github/workflows/ci.yml` — managed by DevOS Watcher/Medic, edit via devos-api if needed
 - `sentry.*.config.ts` — error reporting config, changes should be intentional
+- `.github/workflows/ci.yml` — managed by DevOS Watcher/Medic (will be created when app is set up)
 
-## Local development
+## Local development (once Next.js is set up)
 ```bash
-npm install
+npm install       # install dependencies
 npm run dev       # starts dev server on http://localhost:3000
 npm run build     # production build check
-npm run lint      # ESLint
+npm run lint      # ESLint (needs config)
 npm run type-check # TypeScript
-npm test          # Jest/Vitest
+npm test          # test suite (not yet created)
 ```
 
-## Deployment
+## Deployment (once app is implemented)
 Vercel auto-deploys from `main` branch. Preview deployments on every PR. Set `SENTRY_DSN` in Vercel environment variables.

@@ -1,9 +1,22 @@
 # tap-web — Architecture
 
 ## Overview
-Single-page promotional website built with Next.js 14 App Router. Optimized for fast load times, SEO, and mobile-first experience.
+⚠️ **Initial scaffold state** — Single-page promotional website planned for Next.js 14 App Router. Currently contains only Sentry configuration files and documentation templates. The Next.js application needs to be created.
 
-## Folder structure
+## Current folder structure
+```
+tap-web/
+├── .env.example                # environment variables template (Sentry config)
+├── .git/                       # git repository
+├── ARCHITECTURE.md             # this file
+├── CLAUDE.md                   # AI agent context
+├── README.md                   # user-facing documentation
+├── instrumentation.ts          # Next.js instrumentation hook (ready for Sentry)
+├── sentry.client.config.ts     # Sentry client config (ready)
+└── sentry.server.config.ts     # Sentry server config (ready)
+```
+
+## Planned folder structure (after Next.js setup)
 ```
 tap-web/
 ├── .github/
@@ -37,7 +50,7 @@ tap-web/
 └── README.md
 ```
 
-## Request lifecycle
+## Request lifecycle (planned implementation)
 
 ### Initial page load (`GET /`)
 1. **Next.js runtime** loads `instrumentation.ts` → Sentry initialized
@@ -50,7 +63,7 @@ tap-web/
 - All navigation client-side (single-page app)
 - Any dynamic data fetches (if added) happen in Server Components or API routes
 
-## Data model
+## Data model (when implemented)
 No backend or database — static content only.
 
 **Product data** (if managing multiple shirts):
@@ -59,7 +72,7 @@ No backend or database — static content only.
 
 Future: connect to CMS (Contentful, Sanity) for non-technical updates.
 
-## Component patterns
+## Component patterns (when implemented)
 
 ### Server Components (default)
 - `src/app/page.tsx` — static, SEO-friendly
@@ -74,7 +87,7 @@ Future: connect to CMS (Contentful, Sanity) for non-technical updates.
 - **CSS variables** in `globals.css` for brand colors, spacing scale
 - **Dark mode**: optional, add `dark:` variants if needed
 
-## Performance
+## Performance (planned targets)
 - **Core Web Vitals targets**:
   - LCP < 2.5s
   - FID < 100ms
@@ -82,7 +95,7 @@ Future: connect to CMS (Contentful, Sanity) for non-technical updates.
 - **Image optimization**: `next/image` auto-generates srcsets, lazy-loads below fold
 - **Font loading**: `next/font` with `display=swap`
 
-## SEO
+## SEO (when implemented)
 - **Metadata** in `src/app/layout.tsx`:
   - `<title>` and `<meta name="description">`
   - Open Graph tags for social sharing
@@ -91,21 +104,22 @@ Future: connect to CMS (Contentful, Sanity) for non-technical updates.
 - **Structured data**: add JSON-LD for Product schema if needed
 
 ## Error handling
-- **Sentry** captures all uncaught errors (client + server)
-- **Custom error boundaries**: add `error.tsx` in `src/app/` if needed
-- **404 page**: add `not-found.tsx` for custom 404 design
+- **Sentry** config ready in `instrumentation.ts` and `sentry.*.config.ts`
+- **Custom error boundaries**: add `error.tsx` in `src/app/` when needed
+- **404 page**: add `not-found.tsx` for custom 404 design when app is built
 
-## Deployment
+## Deployment (when app is ready)
 - **Vercel** (recommended): auto-detects Next.js, zero config
 - **Environment variables** set in Vercel dashboard:
-  - `SENTRY_DSN` (required)
+  - `SENTRY_DSN` (required, from `.env.example`)
   - `NEXT_PUBLIC_SITE_URL` (optional, for canonical URLs)
-- **Build command**: `npm run build`
+  - `NEXT_PUBLIC_SENTRY_ENVIRONMENT` (optional, defaults to production)
+- **Build command**: `npm run build` (once package.json exists)
 - **Output**: static + serverless functions (App Router pages)
 
-## Observability
-- **Sentry**: error tracking, performance monitoring
-- **Vercel Analytics**: Core Web Vitals, real user metrics
+## Observability (when deployed)
+- **Sentry**: error tracking, performance monitoring (configured)
+- **Vercel Analytics**: Core Web Vitals, real user metrics (built-in)
 - **Logs**: view in Vercel Functions tab (if using server-side features)
 
 ## Security
@@ -113,8 +127,12 @@ Future: connect to CMS (Contentful, Sanity) for non-technical updates.
 - **Content Security Policy**: add to `next.config.js` if embedding third-party scripts
 - **HTTPS**: enforced by Vercel
 
-## Future enhancements
-- Add CMS for product content (Sanity, Contentful)
-- E-commerce integration (Stripe, Shopify)
-- A/B testing (Vercel Edge Middleware + feature flags)
-- Analytics (Google Analytics, Plausible)
+## Implementation roadmap
+1. Initialize Next.js 14 with App Router (`create-next-app`)
+2. Integrate existing Sentry config files
+3. Set up Tailwind CSS
+4. Create landing page (`src/app/page.tsx`)
+5. Build components (Hero, ProductShowcase, Footer)
+6. Add product images and assets
+7. Configure CI/CD pipeline
+8. Deploy to Vercel
