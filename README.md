@@ -31,6 +31,7 @@ Required variables:
 
 Optional:
 - `NEXT_PUBLIC_SITE_URL` — canonical URL for SEO (defaults to localhost in dev)
+- `NEXT_PUBLIC_SENTRY_ENVIRONMENT` — Sentry environment tag (defaults to `development`)
 
 ### Development
 Start the dev server:

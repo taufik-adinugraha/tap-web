@@ -3,19 +3,30 @@
 ## Purpose
 Single-page promotional website for a shirt product. Lightweight marketing landing page with product showcase, hero imagery, and call-to-action.
 
-## Stack
+## Current status
+**Scaffold stage**: This repository currently contains only Sentry configuration files and documentation. The Next.js application structure needs to be initialized.
+
+**Files in place:**
+- `instrumentation.ts` — Sentry initialization (first thing loaded)
+- `sentry.client.config.ts` — client-side Sentry setup
+- `sentry.server.config.ts` — server-side Sentry setup
+- `.env.example` — environment variable template
+
+**Next steps**: Run `npx create-next-app@latest . --typescript --tailwind --app --src-dir` to scaffold the Next.js application, then integrate the existing Sentry files.
+
+## Target stack
 - **Framework**: Next.js 14 (App Router)
 - **Runtime**: Node 20
 - **Styling**: Tailwind CSS
 - **Deployment**: Vercel
-- **Error monitoring**: Sentry
+- **Error monitoring**: Sentry (already configured)
 
-## Key files
+## Key files (once initialized)
 - `src/app/page.tsx` — main landing page component
 - `src/app/layout.tsx` — root layout with metadata and global styles
-- `instrumentation.ts` — Sentry initialization (first thing loaded)
-- `sentry.client.config.ts` — client-side Sentry setup
-- `sentry.server.config.ts` — server-side Sentry setup
+- `instrumentation.ts` — ✅ Sentry initialization (already in place)
+- `sentry.client.config.ts` — ✅ client-side Sentry setup (already in place)
+- `sentry.server.config.ts` — ✅ server-side Sentry setup (already in place)
 - `tailwind.config.ts` — Tailwind configuration
 - `public/` — static assets (images, fonts)
 
